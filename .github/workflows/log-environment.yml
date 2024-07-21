@@ -1,0 +1,29 @@
+name: log-environment
+on: 
+  - push
+
+jobs:
+  log-environment:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          sudo apt-get update
+          sudo apt-get install tree
+
+      - name: Initial Environment Variables
+        run: |
+          env | sort
+
+      - name: Initial Directory Content
+        run: |
+          tree -a
+
+      - uses: actions/checkout@v4
+
+      - name: After Checkout Environment Variables
+        run: |
+          env | sort
+
+      - name: After Checkout Directory Content
+        run: |
+          tree -a
